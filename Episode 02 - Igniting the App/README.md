@@ -1,0 +1,1 @@
+For Notes refer - https://yashashri.hashnode.dev/namaste-react-lecture-02-inginting-the-app
