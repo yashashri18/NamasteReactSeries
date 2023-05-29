@@ -1,1 +1,1 @@
-For Notes refer - https://yashashri.hashnode.dev/namaste-react-lecture-03-laying-the-foundation
+For Notes refer - https://yashashri.hashnode.dev/namaste-react-lecture-04-talk-is-cheap-show-me-the-code

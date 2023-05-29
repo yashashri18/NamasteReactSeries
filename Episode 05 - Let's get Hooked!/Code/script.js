@@ -1,10 +1,6 @@
 import React from "react"
 import ReactDOM  from "react-dom/client"
 
-
-
-
-//React Component
 const Title = () => {
     return(
         <a href="/">
@@ -29,8 +25,6 @@ const Header = () => {
         </div>
     )
 }
-
-
 
 const restaurantList = [
         {
@@ -1635,48 +1629,6 @@ const restaurantList = [
         }
 ]
 
-//Case 1 -
-// const RestroCard = (props) => {
-//     return(
-//         <div className="card">
-//             <img src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/"
-//             +props.restaurant.data.cloudinaryImageId}/>
-//             <h2>{props.restaurant.data?.name}</h2> 
-//             <h3>{props.restaurant.data?.cuisines.join(", ")}</h3> 
-//             <h4>{props.restaurant.data?.avgRating} stars</h4> 
-//         </div>
-//     )
-// }
-
-//destructuring restaurant object in prop on the fly
-// const RestroCard = ({restaurant}) => {
-//     return(
-//         <div className="card">
-//             <img src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/"
-//             +restaurant.data.cloudinaryImageId}/>
-//             <h2>{restaurant.data?.name}</h2> 
-//             <h3>{restaurant.data?.cuisines.join(", ")}</h3> 
-//             <h4>{restaurant.data?.avgRating} stars</h4> 
-//         </div>
-//     )
-// }
-
-// //destructuring restaurant object in prop on the fly
-// const RestroCard = ({restaurant}) => {
-//     //further descructuring restraurant object
-//     const {cloudinaryImageId,name,cuisines,avgRating} = restaurant.data
-//     return(
-//         <div className="card">
-//             <img src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/"
-//             +cloudinaryImageId}/>
-//             <h2>{name}</h2> 
-//             <h3>{cuisines.join(", ")}</h3> 
-//             <h4>{avgRating} stars</h4> 
-//         </div>
-//     )
-// }
-
-//Caee 2 - destructuring everything on the fly
 const RestroCard = ({cloudinaryImageId,name,cuisines,avgRating}) => {
     return(
         <div className="card">
@@ -1689,33 +1641,9 @@ const RestroCard = ({cloudinaryImageId,name,cuisines,avgRating}) => {
     )
 }
 
-
-//
 const Body = () => {
     return(
         <div className="restaurant-list">
-            {/* case 1 */}
-            {/* <RestroCard restaurant = {restaurantList[0]}/> */}
-
-            {/* Case 2 - */}
-            {/* <RestroCard 
-            cloudinaryImageId = {restaurantList[0].data.cloudinaryImageId}
-            name = {restaurantList[0].data.name}
-            cuisines = {restaurantList[0].data.cuisines}
-            avgRating = {restaurantList[0].data.avgRating}
-            /> */}
-
-            {/* The above code can be simply writtn like below */}
-            {/* The spread operator ({...restaurant.data}) 
-            is used to pass all the properties of 
-            restaurant.data as individual props to 
-            the RestaurantCard component. 
-            This allows the component to access and use the properties directly. */}
-            {/* <RestroCard {...restaurantList[0].data}/>
-            <RestroCard {...restaurantList[1].data}/>
-            <RestroCard {...restaurantList[3].data}/> */}
-
-            {/* we can use map function to call all RestroCard */}
             {
                 restaurantList.map((restaurant)=>{
                     return <RestroCard key={...restaurant.data.id} {...restaurant.data}/>
