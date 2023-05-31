@@ -1,0 +1,40 @@
+#container{
+ background-color: aquamarine;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+}
+.header .logo{
+    width: 120px;
+}
+.header .nav-items > ul{
+    display: flex;
+    list-style-type:none ;
+}
+.header .nav-items > ul > li{
+    padding: 10px;
+}
+
+.card{
+    width: 250px;
+    border:1px solid black ;
+    padding: 5px;
+    margin:15px ;
+}
+.card img{
+    width: 100%;
+}
+
+.restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search-container{
+    margin:15px;
+}

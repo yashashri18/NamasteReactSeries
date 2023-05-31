@@ -9,7 +9,7 @@ const  filterData = (searchText, restaurants) => {
 
 const Body = () => {
     let [restaurants, setRestaurants] = useState(restaurantList);
-    let [allRestaurants, setAllRestaurants] = useState(restaurantList);
+    let [allRestaurants] = useState(restaurantList);
     let [searchText, setSearchText] = useState("");
     return(
         <>
