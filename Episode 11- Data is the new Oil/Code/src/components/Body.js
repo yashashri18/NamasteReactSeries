@@ -12,7 +12,7 @@ const Body = () => {
     //const [allRestaurants,filteredRestaurants] = useFetchRestaurant();
     let [allRestaurants,setAllRestaurants] = useState([]);
     let [filteredRestaurants, setFilteredRestaurants] = useState([]);
-    const {user} = useContext(userContext)
+    const {user, setUser} = useContext(userContext)
 
     useEffect(()=>{
         getRestaurants();
@@ -64,6 +64,23 @@ const Body = () => {
                         setFilteredRestaurants(data)
                     }}
                 >Search</button>
+                <input
+                type="text" 
+                className="border-2 border-solid border-stone-950"
+                value={user.name}
+                onChange={(e)=>{
+                    setUser({...user,name:e.target.value})
+                }}>
+                </input>
+                <input
+                type="text" 
+                className="border-2 border-solid border-stone-950"
+                value={user.email}
+                onChange={(e)=>{
+                    setUser({...user,email:e.target.value})
+                }}>
+                </input>
+                
             </div>
             <div className="flex flex-wrap">
                 {

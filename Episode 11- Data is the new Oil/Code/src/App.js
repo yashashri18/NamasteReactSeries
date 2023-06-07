@@ -27,7 +27,10 @@ const AppLayout = () => {
     })
     return (
         <userContext.Provider
-            value={{ user:user }}
+            value={{ 
+                user:user ,
+                setUser:setUser
+            }}
         >
             <Header/>
             <Outlet/>

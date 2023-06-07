@@ -7,4 +7,6 @@ const userContext = createContext({
     }
 })
 
+//this is helpful for debugging - in react dev tools
+userContext.displayName = userContext
 export default userContext;
