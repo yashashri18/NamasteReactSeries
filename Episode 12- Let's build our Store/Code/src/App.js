@@ -5,12 +5,15 @@ import Footer from "./components/Footer"
 import Body from "./components/Body"
 import Contact from "./components/Contact"
 import Profile from "./components/Profile"
-import RestaurantMenu from "./Components/RestaurantMenu";
+import RestaurantMenu from "./Components/RestaurantMenu"
 import Error from "./components/Error"
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom"
 import { lazy, Suspense } from "react"
 import Shimmer from "./components/Shimmer"
 import userContext from "./utils/userContext"
+import {Provider} from "react-redux"
+import store from "./utils/store"
+import Cart from "./components/Cart"
 
 //import About from "./components/About"
 //import Instamart from "./components/Instamart"
@@ -26,16 +29,18 @@ const AppLayout = () => {
         email:"yashashri18.bongulwar@gmail.com"
     })
     return (
-        <userContext.Provider
-            value={{ 
-                user:user ,
-                setUser:setUser
-            }}
-        >
-            <Header/>
-            <Outlet/>
-            <Footer/>
-        </userContext.Provider>  
+        <Provider store={store}>
+            <userContext.Provider
+                value={{ 
+                    user:user ,
+                    setUser:setUser
+                }}
+            >
+                <Header/>
+                <Outlet/>
+                <Footer/>
+            </userContext.Provider>
+        </Provider>  
     )
 }
 
@@ -62,6 +67,10 @@ const appRouter = createBrowserRouter([
             {
                 path:"/contact",
                 element:<Contact/>
+            },
+            {
+                path:"/cart",
+                element:<Cart/>
             },
             {
                 path:"/instamart",

@@ -19,7 +19,12 @@ const Body = () => {
     },[])
 
     async function getRestaurants (){
+        //pune
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&page_type=DESKTOP_WEB_LISTING");
+        //mumbai
+        //const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&page_type=DESKTOP_WEB_LISTING");
+        //hyderabad
+        //const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json()
         //console.log(json.data.cards[2].data.data.cards)
         //optional chaining

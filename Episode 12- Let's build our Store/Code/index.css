@@ -11,6 +11,36 @@
 
 
 
+#ivole-histogramTable tbody .ivole-histogramRow:nth-child(3) .ivole-histogramCell2 .ivole-meter .ivole-meter-bar{
+    background: red;
+    background-color: red;
+}
+
+
+
+
+
+#ivole-histogramTable tbody .ivole-histogramRow:nth-child(1) .ivole-histogramCell2 .ivole-meter .ivole-meter-bar{
+    background: #2e7d32;
+    background-color:#2e7d32;
+}
+#ivole-histogramTable tbody .ivole-histogramRow:nth-child(2) .ivole-histogramCell2 .ivole-meter .ivole-meter-bar{
+    background: #6dcd72;
+    background-color: #6dcd72;
+}
+#ivole-histogramTable tbody .ivole-histogramRow:nth-child(3) .ivole-histogramCell2 .ivole-meter .ivole-meter-bar{
+    background: #f6d758;
+    background-color: #f6d758;
+}
+#ivole-histogramTable tbody .ivole-histogramRow:nth-child(4) .ivole-histogramCell2 .ivole-meter .ivole-meter-bar{
+    background: #fbb852;
+    background-color: #fbb852;
+}
+#ivole-histogramTable tbody .ivole-histogramRow:nth-child(5) .ivole-histogramCell2 .ivole-meter .ivole-meter-bar{
+    background: #f17954;
+    background-color: #f17954;
+}
+
 
 
 

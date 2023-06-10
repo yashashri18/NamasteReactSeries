@@ -9,7 +9,7 @@ export const restaurantList = [
     "type": "restaurant",
     "data": {
     "type": "F",
-    "id": "3854",
+    "id": "3854", 
     "name": "Uncle's Chinese",
     "uuid": "b526bcfa-20f4-4fe9-b0a6-3192b80c135d",
     "city": "6",
