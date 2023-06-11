@@ -48,9 +48,16 @@ setup tailwind
 
 Features Used
 
-- youtube video api
+- live youtube video api
 - tailwind css
 - redux-toolkit
 - react-router-dom
+- search functionality (using youtube search api and ebouncing)
+
+
+
+Notes - 
+Higher Order Component - that takes component and returns a component
+
 
 
