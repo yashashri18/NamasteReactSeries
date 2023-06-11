@@ -19,7 +19,6 @@ const Header = () => {
     console.log(cartItems)
 
     return(
-        
         <div style={{border:"1px solid black"}} className="m-3 p-3 flex justify-between items-center">
             <Title/>  
             <div className="nav-items">

@@ -18,8 +18,6 @@ const RestaurantMenu = () => {
     const addFoodItem = (item)=>{
         dispatch(addItem(item))
     }
-    console.log("restaurantInfo is")
-    console.log(restaurantInfo)
     const {name, city , locality, costForTwoMessage,cloudinaryImageId} = restaurantInfo?.cards[0]?.card?.card?.info;
     const {itemCards} = restaurantInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
     
