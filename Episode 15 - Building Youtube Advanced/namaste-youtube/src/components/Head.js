@@ -1,8 +1,58 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch , useSelector } from 'react-redux'
 import {toggleMenu} from "../utils/appSlice"
+import {YOUTUBE_SEARCH_API} from "../utils/constants"
+import SearchIcon from './SearchIcon'
+import { cacheResults } from '../utils/searchSlice'
 const Head = () => {
+
     const dispatch = useDispatch()
+
+    const [searchQuery,setSearchQuery] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const [showSuggestions , setShowSuggestion] = useState(false);
+
+    const searchCache = useSelector(store => store.search.results);
+
+    /**
+     * results:{
+     *  "ihpone":["iphone pro", "iphone pro max" , "iphone 13"]
+     * }
+     */
+    useEffect(()=>{
+        //make api call after every key press
+        //but if the diff between two api calls < 200ms 
+        //decline the api call
+        console.log("search cache is ")
+        console.log(searchCache)
+        const timer = setTimeout(()=>{
+            if(searchCache[searchQuery])
+            {
+                setSuggestions(searchCache[searchQuery])
+            }
+            else{
+                getSearchSuggestions()
+            }
+        },200)
+
+        return () => {
+            clearTimeout(timer)
+        }
+    },[searchQuery])
+
+    const getSearchSuggestions = async() => {
+        console.log("api call is made for - " + searchQuery)
+        const data = await fetch(YOUTUBE_SEARCH_API + searchQuery)
+        const json = await data.json()
+        setSuggestions(json[1])
+        //update in cache
+        dispatch(cacheResults({
+            [searchQuery]:json[1],
+        }))
+    }
+
+
+    
     const toggleMenuHandler = () => {
         dispatch(toggleMenu())
     }
@@ -25,16 +75,35 @@ const Head = () => {
                 </a>
             </div>
 
-            <div className='col-span-10 bg-white flex items-center p-2 rounded-full w-1/2 m-auto'>
-                <input className="flex-grow px-4 py-2 rounded-l-full border border-gray-300 " type="text" placeholder="Search" />
-                <button className="bg-[#f8f8f8] text-black px-4 py-2 rounded-r-full border border-gray-300">
-                    <img 
-                        className='h-6'
-                        alt="search" 
-                        src="https://w7.pngwing.com/pngs/403/380/png-transparent-computer-icons-youtube-symbol-information-black-dandelion-circle-symbol-magnifying-glass-thumbnail.png"/>
-                </button>
+            <div className='col-span-10 bg-white  p-2 rounded-full w-1/2 m-auto'>
+              
+                <div className='flex items-center'>
+                    <input 
+                        className="flex-grow px-4 py-2 rounded-l-full border border-gray-300 " 
+                        type="text" 
+                        placeholder="Search" 
+                        value={searchQuery}
+                        onChange={(e)=>setSearchQuery(e.target.value)}
+                        onFocus={()=>setShowSuggestion(true)}
+                        onBlur={()=>setShowSuggestion(false)}
+                    />
+                    <button className="bg-[#f8f8f8] text-black px-4 py-2 rounded-r-full border border-gray-300">
+                        <SearchIcon/>
+                    </button>
+                </div>
+                {showSuggestions &&  <div className='fixed bg-white py-2 px-5 w-[42rem] shadow-lg rounded-lg border border-grey-100'>
+                    <ul>
+                        {suggestions.map((suggestion) => (
+                            <li 
+                            key={suggestion} 
+                            className='py-2 px-3 shadow-sm hover:bg-gray-100'
+                            >
+                                <SearchIcon/>{suggestion}
+                            </li>
+                        ))}
+                    </ul>
+                </div>}
             </div>
-
             <div className='col-span-1  bg-red-300'>
                 <img
                     className='h-8'
@@ -46,3 +115,6 @@ const Head = () => {
     )
 }
 export default Head;
+
+
+

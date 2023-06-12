@@ -52,7 +52,55 @@ Features Used
 - tailwind css
 - redux-toolkit
 - react-router-dom
-- search functionality (using youtube search api and ebouncing)
+- search functionality (using youtube search api and debouncing)
+
+Debouncing 
+
+- if we are typing slow - the diff between key strokes is very high
+- if we are typing fast - the diff between ket strokes is very less
+(from user prospective - if user is typing very fast - that means user knows what exactly to search and does not expects auto-suggestions)
+
+- when user is typing fast - we can skip api call for every key press 
+- we can define a timegap 
+eg - debouncing in 200ms
+if the diff between 2 keystrokes is less than 200 , then skip api call , otherwise make api call.
+because every api call is heavy operation(if we reduce api call by few number it will be more performance efficient)
+
+- we can do this using setTimeout()
+useEffect(()=>{
+    setTimeout(()=>getSearchSuggestions(),200)
+},[searchQuery])
+
+key - i
+- render the componeent 
+- useEffect();
+- start timer and make api call after 200ms 
+
+if second key press with within 200ms 
+
+key - ip
+- render the component
+- useEffect();
+- start the new timer and make api call after 200ms 
+
+when another key press is done - it destroys the component and rerender it 
+when the component rerenders , we have to claen the timer of the first render
+
+we can do this using return()=>{} inside useEffect
+
+return method is called exactly before component destroyes
+
+useEffect(()=>{
+    const timer = setTimeout(()=>getSearchSuggestions(),200)
+    return () => {
+        clearTimeout(timer)
+    }
+},[searchQuery]) 
+
+so if the diff between two key strokes is less than 200ms then the timer expires before its execution call and hence the api call is skippd
+
+if the diff is greater than 200ms , the timer executes and api call is made
+
 
 
 
