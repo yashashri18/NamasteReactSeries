@@ -1,1 +1,6 @@
-For Notes refer - https://yashashri.hashnode.dev/namaste-react-lecture-04-talk-is-cheap-show-me-the-code
+In This lecture we learned about 
+
+1. what is React Fragment
+2. What are props  
+3. What is Reconciliation and Virtual DOM
+4. Whay do we use keys 

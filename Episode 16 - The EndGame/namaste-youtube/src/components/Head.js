@@ -31,6 +31,7 @@ const Head = () => {
             if(searchCache[searchQuery])
             {
                 setSuggestions(searchCache[searchQuery])
+                setShowSuggestion(true)
             }
             else{
                 getSearchSuggestions()
@@ -47,6 +48,8 @@ const Head = () => {
         const data = await fetch(YOUTUBE_SEARCH_API + searchQuery)
         const json = await data.json()
         setSuggestions(json[1])
+        setShowSuggestion(true)
+
         //update in cache
         dispatch(cacheResults({
             [searchQuery]:json[1],
@@ -57,8 +60,12 @@ const Head = () => {
         // Fetch data here
         const data = await fetch(YOUTUBE_KEYWORD_SEARCH_API+suggestion+"&key="+GOOGLE_API_KEY);
         const json = await data.json();
+        //setSearchQuery(suggestion)
+        setShowSuggestion(false)
+        setSuggestions([])
+
         // Dispatch action with the fetched data
-        dispatch(setVideos(json.items))      
+        dispatch(setVideos(json.items))   
     };
 
     const toggleMenuHandler = () => {
@@ -66,7 +73,7 @@ const Head = () => {
     }
 
     return(
-        <div className='grid grid-flow-col p-2 m-2 shadow-lg items-center'>
+        <div className='header grid grid-flow-col p-2 m-2 shadow-lg items-center'>
 
             <div className='flex col-sapn-1 bg-red-300'>
                 <img 
@@ -84,7 +91,7 @@ const Head = () => {
                 </a>
             </div>
 
-            <div className='col-span-10 bg-white  p-2 rounded-full w-1/2 m-auto'>
+            <div className='relative col-span-10 bg-white  p-2 rounded-full w-1/2 m-auto'>
               
                 <div className='flex items-center'>
                     <input 
@@ -93,14 +100,15 @@ const Head = () => {
                         placeholder="Search" 
                         value={searchQuery}
                         onChange={(e)=>setSearchQuery(e.target.value)}
-                        onFocus={()=>setShowSuggestion(true)}
-                        onBlur={()=>setShowSuggestion(false)}
+                        //onFocus={()=>setShowSuggestion(true)}
+                        // onBlur={()=>setShowSuggestion(false)}
                     />
                     <button className="bg-[#f8f8f8] text-black px-4 py-2 rounded-r-full border border-gray-300">
                         <SearchIcon/>
                     </button>
                 </div>
-                {showSuggestions &&  <div className='fixed bg-white py-2 px-5 w-[42rem] shadow-lg rounded-lg border border-grey-100'>
+                {showSuggestions &&  
+             <div className='absolute bg-white px-5 w-[42rem] shadow-lg rounded-lg  border-grey-100'>
                     <ul>
                         {suggestions.map((suggestion) => (
                             <li 
@@ -112,8 +120,8 @@ const Head = () => {
                             </li>
                         ))}
                     </ul>
-                </div>}
-                <button onClick={()=>{handleSuggestionClick("iphone")}}>Click here</button>
+                </div>
+            } 
             </div>
             
             <div className='col-span-1  bg-red-300'>
