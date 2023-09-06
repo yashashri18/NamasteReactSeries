@@ -1,12 +1,15 @@
 import React,{useState, useRef} from 'react'
 import Header from './Header'
 import {checkValidData} from '../utils/formValidation.js'
-import {createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword ,signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {auth} from '../utils/firebase'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const Login = () => {
 
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const [isSigninForm , setIsSigninForm] = useState(true)
@@ -40,15 +43,28 @@ const Login = () => {
             .then((userCredential) => {
               // Signup success
               const user = userCredential.user;
-              console.log("Successfully cretaed user")
-              console.log(user)
-              navigate("/browse")
+              //update user name 
+                updateProfile(user, {
+                  displayName: name.current.value
+                }).then(() => {
+                  const {uid , email, displayName} = auth.currentUser
+                  dispatch(addUser({
+                    uid:uid,
+                    email:email,
+                    displayName:displayName
+                  }))
+                  navigate("/browse")
+                  console.log("username updated")
+                  console.log(user)
+                }).catch((error) => {
+                  console.log("error while updating username")
+                });
+              
             })
             .catch((error) => {
               const errorCode = error.code;
               const errorMessage = error.message;
               console.log("there is some error",errorCode)
-              
             });
         }
         else{
