@@ -16,7 +16,6 @@ const MainComponent2 = () => {
 
   return (
     <div>
-      <h1>this is main container</h1>
       <VideoTitle title={original_title} overview={overview} />
       <VideoBackground movieId={id}/>
     </div>

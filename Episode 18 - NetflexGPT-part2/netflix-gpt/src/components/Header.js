@@ -53,7 +53,7 @@ const Header = () => {
       <img src={netflix_logo} alt="logo" className='w-44'/>
       {user && <div className='flex items-center'>
         <img className='w-10 h-10' src={user_icon} alt="user_icon"/>
-        <p className='cursor-pointer' onClick={signoutHandleClick}>[Signout]{user.displayName}</p>
+        <p className='cursor-pointer text-white text-xl' onClick={signoutHandleClick}>Signout</p>
       </div>}
     </div>
   )
